@@ -1,0 +1,132 @@
+Analyzing nfc_tracker...                                        
+
+   info • The imported package 'http' isn't a dependency of the importing package • lib/add_mobile_form.dart:4:8 • depend_on_referenced_packages
+   info • The imported package 'http_parser' isn't a dependency of the importing package • lib/add_mobile_form.dart:5:8 • depend_on_referenced_packages
+   info • Don't use 'BuildContext's across async gaps • lib/add_mobile_form.dart:324:30 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/add_mobile_form.dart:330:32 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/add_mobile_form.dart:338:32 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/add_mobile_form.dart:371:30 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/add_mobile_form.dart:377:28 • use_build_context_synchronously
+  error • Expected to find '}' • lib/add_mobile_form.dart:381:1 • expected_token
+   info • The imported package 'http' isn't a dependency of the importing package • lib/main_home.dart:8:8 • depend_on_referenced_packages
+warning • The value of the field '_uid' isn't used • lib/main_home.dart:25:11 • unused_field
+warning • The value of the field '_error' isn't used • lib/main_home.dart:26:11 • unused_field
+   info • Don't use 'BuildContext's across async gaps • lib/main_home.dart:54:28 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/main_home.dart:95:32 • use_build_context_synchronously
+   info • Don't invoke 'print' in production code • lib/main_home.dart:162:7 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/mobile_layout.dart:41:17 • sized_box_for_whitespace
+warning • This class (or a class that this class inherits from) is marked as '@immutable', but one or more of its instance fields aren't final: NationalityRow.isSelected • lib/nationality_row.dart:3:7 • must_be_immutable
+warning • The value of the field '_selectedNationality' isn't used • lib/nationality_row.dart:18:11 • unused_field
+warning • The value of the field '_selectedIssueNationality' isn't used • lib/nationality_row.dart:19:11 • unused_field
+warning • The value of the field '_countries' isn't used • lib/nationality_row.dart:22:22 • unused_field
+warning • Unused import: 'dart:io' • lib/nfc_service.dart:3:8 • unused_import
+   info • The imported package 'ffi' isn't a dependency of the importing package • lib/nfc_service.dart:5:8 • depend_on_referenced_packages
+   info • The variable name '_SCARD_PCI_T0' isn't a lowerCamelCase identifier • lib/nfc_service.dart:7:26 • non_constant_identifier_names
+   info • The variable name '_SCARD_PCI_T1' isn't a lowerCamelCase identifier • lib/nfc_service.dart:8:26 • non_constant_identifier_names
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:55:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:78:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:85:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:98:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:116:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:124:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:132:5 • avoid_print
+warning • The value of the local variable 'payloadLength' isn't used • lib/nfc_service.dart:136:9 • unused_local_variable
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:141:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:157:5 • avoid_print
+   info • The variable name '_SCardEstablishContext' isn't a lowerCamelCase identifier • lib/nfc_service.dart:213:7 • non_constant_identifier_names
+   info • The variable name '_SCardReleaseContext' isn't a lowerCamelCase identifier • lib/nfc_service.dart:214:32 • non_constant_identifier_names
+   info • The variable name '_SCardListReaders' isn't a lowerCamelCase identifier • lib/nfc_service.dart:216:63 • non_constant_identifier_names
+   info • The variable name '_SCardConnect' isn't a lowerCamelCase identifier • lib/nfc_service.dart:219:7 • non_constant_identifier_names
+   info • The variable name '_SCardDisconnect' isn't a lowerCamelCase identifier • lib/nfc_service.dart:220:37 • non_constant_identifier_names
+   info • The variable name '_SCardTransmit' isn't a lowerCamelCase identifier • lib/nfc_service.dart:222:55 • non_constant_identifier_names
+   info • The constant name 'SCARD_SCOPE_USER' isn't a lowerCamelCase identifier • lib/nfc_service.dart:225:20 • constant_identifier_names
+   info • The constant name 'SCARD_SHARE_SHARED' isn't a lowerCamelCase identifier • lib/nfc_service.dart:226:20 • constant_identifier_names
+   info • The constant name 'SCARD_PROTOCOL_T0' isn't a lowerCamelCase identifier • lib/nfc_service.dart:227:20 • constant_identifier_names
+   info • The constant name 'SCARD_PROTOCOL_T1' isn't a lowerCamelCase identifier • lib/nfc_service.dart:228:20 • constant_identifier_names
+   info • The constant name 'SCARD_LEAVE_CARD' isn't a lowerCamelCase identifier • lib/nfc_service.dart:229:20 • constant_identifier_names
+   info • Don't invoke 'print' in production code • lib/nfc_service.dart:240:7 • avoid_print
+   info • Angle brackets will be interpreted as HTML • lib/nfc_service.dart:256:68 • unintended_html_in_doc_comment
+   info • 'elementAt' is deprecated and shouldn't be used. Use operator + instead • lib/nfc_service.dart:261:24 • deprecated_member_use
+   info • 'elementAt' is deprecated and shouldn't be used. Use operator + instead • lib/nfc_service.dart:305:40 • deprecated_member_use
+warning • Unused import: 'dart:io' • lib/old_window_nfc.dart:3:8 • unused_import
+   info • The imported package 'ffi' isn't a dependency of the importing package • lib/old_window_nfc.dart:5:8 • depend_on_referenced_packages
+   info • The variable name '_SCARD_PCI_T0' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:8:26 • non_constant_identifier_names
+   info • The variable name '_SCARD_PCI_T1' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:9:26 • non_constant_identifier_names
+   info • The variable name '_SCardEstablishContext' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:90:7 • non_constant_identifier_names
+   info • The variable name '_SCardReleaseContext' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:91:32 • non_constant_identifier_names
+   info • The variable name '_SCardListReaders' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:93:63 • non_constant_identifier_names
+   info • The variable name '_SCardConnect' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:96:7 • non_constant_identifier_names
+   info • The variable name '_SCardDisconnect' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:97:37 • non_constant_identifier_names
+   info • The variable name '_SCardTransmit' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:99:55 • non_constant_identifier_names
+   info • The constant name 'SCARD_SCOPE_USER' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:102:20 • constant_identifier_names
+   info • The constant name 'SCARD_SHARE_SHARED' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:103:20 • constant_identifier_names
+   info • The constant name 'SCARD_PROTOCOL_T0' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:104:20 • constant_identifier_names
+   info • The constant name 'SCARD_PROTOCOL_T1' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:105:20 • constant_identifier_names
+   info • The constant name 'SCARD_LEAVE_CARD' isn't a lowerCamelCase identifier • lib/old_window_nfc.dart:106:20 • constant_identifier_names
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:117:7 • avoid_print
+   info • Angle brackets will be interpreted as HTML • lib/old_window_nfc.dart:133:68 • unintended_html_in_doc_comment
+   info • 'elementAt' is deprecated and shouldn't be used. Use operator + instead • lib/old_window_nfc.dart:138:24 • deprecated_member_use
+   info • 'elementAt' is deprecated and shouldn't be used. Use operator + instead • lib/old_window_nfc.dart:182:40 • deprecated_member_use
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:290:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:310:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:401:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:415:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:451:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:466:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:471:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:477:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:601:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:606:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:612:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:624:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:633:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:639:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:644:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:649:5 • avoid_print
+   info • Statements in a while should be enclosed in a block • lib/old_window_nfc.dart:655:57 • curly_braces_in_flow_control_structures
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:658:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:660:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:694:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:700:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:704:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:710:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:717:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:747:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:756:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:817:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:820:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:829:3 • avoid_print
+   info • Statements in a while should be enclosed in a block • lib/old_window_nfc.dart:867:32 • curly_braces_in_flow_control_structures
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:869:3 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:879:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:882:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/old_window_nfc.dart:885:3 • avoid_print
+   info • Parameter 'key' could be a super parameter • lib/passport_image_uploader.dart:14:9 • use_super_parameters
+   info • Don't use 'BuildContext's across async gaps • lib/passport_image_uploader.dart:59:28 • use_build_context_synchronously
+   info • The imported package 'http' isn't a dependency of the importing package • lib/pc_layout.dart:10:8 • depend_on_referenced_packages
+   info • The imported package 'http_parser' isn't a dependency of the importing package • lib/pc_layout.dart:11:8 • depend_on_referenced_packages
+   info • Parameter 'key' could be a super parameter • lib/pc_layout.dart:21:9 • use_super_parameters
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:109:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:113:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:128:7 • avoid_print
+   info • Unnecessary use of string interpolation • lib/pc_layout.dart:129:39 • unnecessary_string_interpolations
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:130:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:141:7 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/pc_layout.dart:276:31 • sized_box_for_whitespace
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:293:41 • avoid_print
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/pc_layout.dart:303:31 • sized_box_for_whitespace
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:322:41 • avoid_print
+   info • Don't invoke 'print' in production code • lib/pc_layout.dart:432:41 • avoid_print
+   info • Don't use 'BuildContext's across async gaps • lib/pc_layout.dart:507:64 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps • lib/pc_layout.dart:522:64 • use_build_context_synchronously
+   info • The 'child' argument should be last in widget constructor invocations • lib/pc_layout.dart:642:25 • sort_child_properties_last
+   info • Use a 'SizedBox' to add whitespace to a layout • lib/pc_layout.dart:651:17 • sized_box_for_whitespace
+warning • The value of the local variable 'rawMrzCard' isn't used • lib/pc_layout.dart:791:11 • unused_local_variable
+warning • The value of the local variable 'isPassportMrz' isn't used • lib/pc_layout.dart:805:11 • unused_local_variable
+warning • The declaration '_buildTableRow1' isn't referenced • lib/pc_layout.dart:993:12 • unused_element
+warning • A value for optional parameter 'fontSize' isn't ever given • lib/pc_layout.dart:994:15 • unused_element_parameter
+warning • A value for optional parameter 'isMonospace' isn't ever given • lib/pc_layout.dart:994:35 • unused_element_parameter
+warning • The declaration '_resetData' isn't referenced • lib/view_mobile.dart:20:8 • unused_element
+   info • Statements in an if should be enclosed in a block • lib/view_mobile.dart:130:33 • curly_braces_in_flow_control_structures
+
+128 issues found. (ran in 3.5s)

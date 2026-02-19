@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Identity Verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+        }
+
+        .profile-img-container {
+            width: 150px;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            flex-shrink: 0;
+        }
+
+        #passSizeImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-info-main h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .user-info-main p {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid-content {
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .passport-section {
+            padding: 0 2.5rem 2.5rem;
+        }
+
+        .passport-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .passport-img-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .passport-img-container:hover {
+            transform: scale(1.02);
+        }
+
+        #passportImage {
+            width: 100%;
+            display: block;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--border);
+            border-bottom-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #error-msg {
+            display: none;
+            color: #ef4444;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .profile-img-container {
+                width: 120px;
+                height: 150px;
+            }
+
+            .grid-content {
+                padding: 1.5rem;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .passport-section {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            .user-info-main h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="loading-overlay">
+        <span class="loader"></span>
+        <p>Fetching Secure Identity Data...</p>
+    </div>
+
+    <div id="error-msg">
+        <h2 id="error-title">Oops!</h2>
+        <p id="error-text">Something went wrong while fetching the data.</p>
+    </div>
+
+    <div class="container" id="main-container" style="display: none;">
+        <div class="card">
+            <div class="header">
+                <div class="profile-img-container">
+                    <img id="passSizeDisplay" src="" alt="User Photo">
+                </div>
+                <div class="user-info-main">
+                    <h1 id="fullName">---</h1>
+                    <p><i data-lucide="shield-check" style="width: 20px;"></i> Verified Document Holder</p>
+                </div>
+            </div>
+
+            <div class="grid-content">
+                <div class="info-item">
+                    <span class="info-label">Document Number</span>
+                    <span class="info-value" id="docNumber">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nationality</span>
+                    <span class="info-value" id="nationality">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Date of Birth</span>
+                    <span class="info-value" id="dob">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Gender</span>
+                    <span class="info-value" id="gender">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Issue Date</span>
+                    <span class="info-value" id="issueDate">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Expiry Date</span>
+                    <span class="info-value" id="expiryDate" style="color: #10b981;">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Phone Number</span>
+                    <span class="info-value" id="pNumber">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">MRZ ID</span>
+                    <span class="info-value" id="mrzId">---</span>
+                </div>
+            </div>
+
+            <div class="passport-section">
+                <h3><i data-lucide="file-text" style="width: 20px;"></i> Original Document ID Card</h3>
+                <div class="passport-img-container">
+                    <img id="passportDisplay" src="" alt="Passport/ID Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        async function fetchUserData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let userId = urlParams.get('userId');
+
+            // If not in query param, try to get from path (e.g. /users/view/10)
+            if (!userId) {
+                const pathParts = window.location.pathname.split('/');
+                const lastPart = pathParts[pathParts.length - 1];
+                // Check if the last part is a number or if the second to last is 'view'
+                if (!isNaN(lastPart) && lastPart !== '' && pathParts.includes('view')) {
+                    userId = lastPart;
+                }
+            }
+
+            if (!userId) {
+                showError('User ID Missing', 'No user ID was provided in the URL.');
+                return;
+            }
+
+            try {
+                // Fetch from the API endpoint
+                const response = await fetch(`/users/${userId}`);
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        showError('User Not Found', 'The requested identity record does not exist.');
+                    } else {
+                        throw new Error('Failed to fetch data');
+                    }
+                    return;
+                }
+
+                const data = await response.json();
+                renderData(data);
+            } catch (error) {
+                console.error(error);
+                showError('Server Error', 'Could not connect to the database server.');
+            }
+        }
+
+        function renderData(user) {
+            document.getElementById('fullName').textContent = `${user.givenName} ${user.surname}`;
+            document.getElementById('docNumber').textContent = user.docNumber;
+            document.getElementById('nationality').textContent = user.nationality;
+            document.getElementById('dob').textContent = user.dob;
+            document.getElementById('gender').textContent = user.gender;
+            document.getElementById('issueDate').textContent = user.issueDate;
+            document.getElementById('expiryDate').textContent = user.expiryDate;
+            document.getElementById('pNumber').textContent = user.pNumber || 'N/A';
+            document.getElementById('mrzId').textContent = user.mrzId;
+
+            // Handle images
+            // In the DB, they are stored as 'uploads/filename.ext'
+            // We serve /uploads as static, so we can just use the path from DB
+            // But we need to make sure they are absolute from the root
+            const passSizePath = user.passSizeImage ? (user.passSizeImage.startsWith('/') ? user.passSizeImage : '/' + user.passSizeImage) : 'https://via.placeholder.com/150x180?text=No+Photo';
+            const passportPath = user.passportImage ? (user.passportImage.startsWith('/') ? user.passportImage : '/' + user.passportImage) : 'https://via.placeholder.com/800x500?text=No+Document+Image';
+
+            document.getElementById('passSizeDisplay').src = passSizePath;
+            document.getElementById('passportDisplay').src = passportPath;
+
+            // Show content
+            document.getElementById('loading').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('main-container').style.display = 'block';
+                lucide.createIcons();
+            }, 500);
+        }
+
+        function showError(title, text) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-msg').style.display = 'block';
+            document.getElementById('error-title').textContent = title;
+            document.getElementById('error-text').textContent = text;
+        }
+
+        // Start fetching
+        fetchUserData();
+    </script>
+</body>
+
+</html>
