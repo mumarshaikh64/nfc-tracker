@@ -101,6 +101,74 @@ class _MainHomeState extends State<MainHome> {
     });
   }
 
+// void startNfcScanning() async {
+//   if (!_isScanning) {
+//     final initialized = nfc!.initialize();
+//     if (!initialized) {
+//       setState(() { _error = 'Failed to initialize NFC'; });
+//       return;
+//     }
+
+//     _pollTimer = Timer.periodic(const Duration(seconds: 1), (_) async {
+//       try {
+//         final readers = nfc!.listReaders();
+//         if (readers.isEmpty) {
+//           setState(() { _error = 'No NFC readers found'; _uid = null; });
+//           return;
+//         }
+
+//         final card = nfc!.connect(readers.first);
+
+//         // UID check
+//         final command = <int>[0xFF, 0xCA, 0x00, 0x00, 0x00];
+//         final response = card.transmit(Uint8List.fromList(command));
+//         final sw1 = response[response.length - 2];
+//         final sw2 = response[response.length - 1];
+//         if (sw1 != 0x90 || sw2 != 0x00) throw Exception('Failed to read UID');
+
+//         // ✅ readNdef — handles both URL (mobile) and Text (PC) records
+//         final result = readNdef(card);
+//         card.disconnect(NfcService.SCARD_LEAVE_CARD);
+
+//         if (result == null) {
+//           setState(() { _error = 'No NDEF data on tag'; _uid = null; });
+//           return;
+//         }
+
+//         String? userId;
+
+//         if (result.type == 'url') {
+//           // Mobile ne URL likha tha — userId query param se nikalo
+//           // e.g. "https://example.com?userId=123"
+//           final uri = Uri.tryParse(result.value);
+//           userId = uri?.queryParameters['userId'];
+
+//           // agar puri URL hi userId hai (koi query param nahi)
+//           userId ??= result.value;
+
+//         } else {
+//           // PC ne plain text likha tha — directly userId hai
+//           userId = result.value;
+//         }
+
+//         if (userId == null || userId.isEmpty) {
+//           setState(() { _error = 'No userId found in tag'; _uid = null; });
+//           return;
+//         }
+
+//         setState(() { _uid = userId; _error = null; });
+//         print(userId);
+//         await fetchUserById(userId);
+
+//       } catch (e) {
+//         setState(() { _error = e.toString(); _uid = null; });
+//       }
+//     });
+
+//     _isScanning = true;
+//   }
+// }
+
   void startNfcScanning() async {
     if (!_isScanning) {
       final initialized = nfc!.initialize();
@@ -110,7 +178,8 @@ class _MainHomeState extends State<MainHome> {
         });
         return;
       }
-      _pollTimer = Timer.periodic(Duration(seconds: 1), (_) async {
+
+      _pollTimer = Timer.periodic(const Duration(seconds: 1), (_) async {
         try {
           final readers = nfc!.listReaders();
           if (readers.isEmpty) {
@@ -120,22 +189,66 @@ class _MainHomeState extends State<MainHome> {
             });
             return;
           }
-          final reader = readers.first;
-          final card = nfc!.connect(reader);
+
+          final card = nfc!.connect(readers.first);
+
+          // UID check
           final command = <int>[0xFF, 0xCA, 0x00, 0x00, 0x00];
           final response = card.transmit(Uint8List.fromList(command));
           final sw1 = response[response.length - 2];
           final sw2 = response[response.length - 1];
-          if (sw1 != 0x90 || sw2 != 0x00) {
-            throw Exception('Failed to read UID');
-          }
-          String? data = readNdefText(card);
+          if (sw1 != 0x90 || sw2 != 0x00) throw Exception('Failed to read UID');
+
+          final result = readNdef(card);
           card.disconnect(NfcService.SCARD_LEAVE_CARD);
+
+          if (result == null) {
+            setState(() {
+              _error = 'No NDEF data on tag';
+              _uid = null;
+            });
+            return;
+          }
+
+          String? userId;
+
+          if (result.type == 'url') {
+            // Mobile URL format: http://31.97.227.51:3300/users/view/60
+            // userId URL ke last segment mein hota hai
+            final uri = Uri.tryParse(result.value);
+            if (uri != null) {
+              // Pehle query param check karo: ?userId=123
+              userId = uri.queryParameters['userId'];
+
+              // Agar query param nahi toh path ka last segment lo
+              // e.g. /users/view/60  →  '60'
+              if (userId == null || userId.isEmpty) {
+                final segments =
+                    uri.pathSegments.where((s) => s.isNotEmpty).toList();
+                if (segments.isNotEmpty) {
+                  userId = segments.last;
+                }
+              }
+            }
+          } else {
+            // PC ne plain text (userId) likha tha
+            userId = result.value.trim();
+          }
+
+          if (userId == null || userId.isEmpty) {
+            setState(() {
+              _error = 'No userId found in tag';
+              _uid = null;
+            });
+            return;
+          }
+
+          print('userId extracted: $userId');
           setState(() {
-            _uid = data;
+            _uid = userId;
             _error = null;
           });
-          fetchUserById(data!);
+          await fetchUserById(userId);
         } catch (e) {
           setState(() {
             _error = e.toString();
